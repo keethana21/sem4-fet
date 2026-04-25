@@ -86,6 +86,22 @@
             margin-bottom: 20px;
         }
 
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
     </style>
 </head>
 
@@ -95,7 +111,10 @@
 
     <div class="header">
         <h1>Keerthana Acharya</h1>
-        <h2>Computer Science Engineering Student</h2>
+        <h2 id="course">Computer Science Engineering Student</h2>
+
+        <!-- Button to change course -->
+        <button onclick="changeCourse()">Change Course</button>
     </div>
 
     <h3>About Me</h3>
@@ -136,16 +155,18 @@
 
 </div>
 
+<!-- JavaScript -->
+<script>
+function changeCourse() {
+    let newCourse = prompt("Enter new course/title:");
+
+    if (newCourse !== null && newCourse.trim() !== "") {
+        document.getElementById("course").innerText = newCourse;
+    } else {
+        alert("Please enter valid text");
+    }
+}
+</script>
+
 </body>
 </html>
-<script>
-        function changeCourse() {
-            let newCourse = prompt("Enter new course/title:");
-
-            if (newCourse !== null && newCourse.trim() !== "") {
-                document.getElementById("course").innerText = newCourse;
-            } else {
-                alert("Please enter valid text");
-            }
-        }
-    </script>
