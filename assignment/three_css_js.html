@@ -4,11 +4,12 @@
     <title>College Form</title>
     <style>
         body { font-family: Arial; padding: 20px; }
-        .box { max-width: 600px; margin: auto; }
+        .box { max-width: 700px; margin: auto; }
         input, select { width: 100%; padding: 8px; margin: 5px 0; }
         button { padding: 10px; width: 100%; background: blue; color: white; border: none; }
         table { width: 100%; margin-top: 20px; border-collapse: collapse; }
         th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        fieldset { margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -17,22 +18,44 @@
     <h2>College Form</h2>
 
     <form id="form">
-        <input type="text" id="name" placeholder="Student Name">
-        <input type="text" id="id" placeholder="Student ID">
-        <input type="text" id="email" placeholder="Email">
-        <input type="text" id="phone" placeholder="Phone">
 
-        <select id="dept">
-            <option value="">Select Department</option>
-            <option>CS</option>
-            <option>IT</option>
-        </select>
+        <fieldset>
+            <legend>Basic Info</legend>
+            <input type="text" id="name" placeholder="Student Name">
+            <input type="text" id="id" placeholder="Student ID">
+            <input type="text" id="email" placeholder="Email">
+        </fieldset>
 
-        <select id="year">
-            <option value="">Select Year</option>
-            <option>1st</option>
-            <option>2nd</option>
-        </select>
+        <fieldset>
+            <legend>Gender (Radio)</legend>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+        </fieldset>
+
+        <fieldset>
+            <legend>Skills (Checkbox)</legend>
+            <input type="checkbox" name="skills" value="HTML"> HTML
+            <input type="checkbox" name="skills" value="CSS"> CSS
+            <input type="checkbox" name="skills" value="JS"> JS
+        </fieldset>
+
+        <fieldset>
+            <legend>Department</legend>
+            <select id="dept">
+                <option value="">Select Department</option>
+                <option>CS</option>
+                <option>IT</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Subjects (List Box)</legend>
+            <select id="subjects" multiple>
+                <option>Math</option>
+                <option>Physics</option>
+                <option>Programming</option>
+            </select>
+        </fieldset>
 
         <button type="submit">Submit</button>
     </form>
@@ -42,26 +65,53 @@
             <th>Name</th>
             <th>ID</th>
             <th>Email</th>
-            <th>Phone</th>
+            <th>Gender</th>
+            <th>Skills</th>
             <th>Dept</th>
-            <th>Year</th>
+            <th>Subjects</th>
         </tr>
     </table>
 </div>
 
 <script>
-document.getElementById("form").onsubmit = function(e) {
+// Event Listener
+document.getElementById("form").addEventListener("submit", function(e) {
     e.preventDefault();
 
     let name = document.getElementById("name").value;
     let id = document.getElementById("id").value;
     let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value;
     let dept = document.getElementById("dept").value;
-    let year = document.getElementById("year").value;
 
-    if (!name || !id || !email || !phone || !dept || !year) {
-        alert("Please fill all fields");
+    // Radio (Gender)
+    let gender = "";
+    let radios = document.getElementsByName("gender");
+    for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            gender = radios[i].value;
+        }
+    }
+
+    // Checkbox (Skills)
+    let skills = [];
+    let checks = document.getElementsByName("skills");
+    for (let i = 0; i < checks.length; i++) {
+        if (checks[i].checked) {
+            skills.push(checks[i].value);
+        }
+    }
+
+    // List box (multiple select)
+    let subjects = [];
+    let sub = document.getElementById("subjects").options;
+    for (let i = 0; i < sub.length; i++) {
+        if (sub[i].selected) {
+            subjects.push(sub[i].value);
+        }
+    }
+
+    if (!name || !id || !email || !gender || skills.length === 0 || !dept) {
+        alert("Fill all fields");
         return;
     }
 
@@ -71,12 +121,13 @@ document.getElementById("form").onsubmit = function(e) {
     row.insertCell(0).innerText = name;
     row.insertCell(1).innerText = id;
     row.insertCell(2).innerText = email;
-    row.insertCell(3).innerText = phone;
-    row.insertCell(4).innerText = dept;
-    row.insertCell(5).innerText = year;
+    row.insertCell(3).innerText = gender;
+    row.insertCell(4).innerText = skills.join(", ");
+    row.insertCell(5).innerText = dept;
+    row.insertCell(6).innerText = subjects.join(", ");
 
     document.getElementById("form").reset();
-};
+});
 </script>
 
 </body>
