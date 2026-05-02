@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Form</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .box { max-width: 600px; margin: auto; }
+        input, select { width: 100%; padding: 8px; margin: 5px 0; }
+        button { padding: 10px; width: 100%; background: blue; color: white; border: none; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>College Form</h2>
+
+    <form id="form">
+        <input type="text" id="name" placeholder="Student Name">
+        <input type="text" id="id" placeholder="Student ID">
+        <input type="text" id="email" placeholder="Email">
+        <input type="text" id="phone" placeholder="Phone">
+
+        <select id="dept">
+            <option value="">Select Department</option>
+            <option>CS</option>
+            <option>IT</option>
+        </select>
+
+        <select id="year">
+            <option value="">Select Year</option>
+            <option>1st</option>
+            <option>2nd</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Dept</th>
+            <th>Year</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+document.getElementById("form").onsubmit = function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let id = document.getElementById("id").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let dept = document.getElementById("dept").value;
+    let year = document.getElementById("year").value;
+
+    if (!name || !id || !email || !phone || !dept || !year) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let table = document.getElementById("table");
+    let row = table.insertRow();
+
+    row.insertCell(0).innerText = name;
+    row.insertCell(1).innerText = id;
+    row.insertCell(2).innerText = email;
+    row.insertCell(3).innerText = phone;
+    row.insertCell(4).innerText = dept;
+    row.insertCell(5).innerText = year;
+
+    document.getElementById("form").reset();
+};
+</script>
+
+</body>
+</html>
