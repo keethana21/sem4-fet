@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Security Check</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background: #f2f2f2;
+    }
+
+    .box {
+      width: 300px;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Security Check</h2>
+
+    <input type="password" id="password" placeholder="Enter Password">
+    <br>
+
+    <button onclick="checkPassword()">Check</button>
+
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function checkPassword() {
+
+      let password = document.getElementById("password").value;
+
+      let i = 0;
+      let hasNumber = false;
+
+      // WHILE LOOP
+      while (i < password.length) {
+        if (password[i] >= '0' && password[i] <= '9') {
+          hasNumber = true;
+        }
+        i++;
+      }
+
+      let attempts = 0;
+
+      // DO WHILE LOOP
+      do {
+
+        if (password.length >= 6 && hasNumber) {
+          document.getElementById("result").innerHTML =
+            "✔ Strong Password";
+          document.getElementById("result").style.color = "green";
+          break;
+        }
+        else {
+          document.getElementById("result").innerHTML =
+            "✖ Weak Password (Use 6+ characters and 1 number)";
+          document.getElementById("result").style.color = "red";
+        }
+
+        attempts++;
+
+      } while (attempts < 1);
+
+    }
+  </script>
+
+</body>
+</html>
