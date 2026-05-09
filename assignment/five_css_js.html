@@ -52,18 +52,25 @@
   </div>
 
   <script>
+
     function checkPassword() {
 
+      // Correct password
+      let correctPassword = "admin123";
+
+      // User entered password
       let password = document.getElementById("password").value;
 
       let i = 0;
-      let hasNumber = false;
+      let match = true;
 
       // WHILE LOOP
-      while (i < password.length) {
-        if (password[i] >= '0' && password[i] <= '9') {
-          hasNumber = true;
+      while (i < correctPassword.length) {
+
+        if (password[i] != correctPassword[i]) {
+          match = false;
         }
+
         i++;
       }
 
@@ -72,16 +79,22 @@
       // DO WHILE LOOP
       do {
 
-        if (password.length >= 6 && hasNumber) {
+        if (password.length == correctPassword.length && match) {
+
           document.getElementById("result").innerHTML =
-            "✔ Strong Password";
+            "✔ Correct Password";
+
           document.getElementById("result").style.color = "green";
-          break;
+
         }
+
         else {
+
           document.getElementById("result").innerHTML =
-            "✖ Weak Password (Use 6+ characters and 1 number)";
+            "✖ Incorrect Password";
+
           document.getElementById("result").style.color = "red";
+
         }
 
         attempts++;
@@ -89,6 +102,7 @@
       } while (attempts < 1);
 
     }
+
   </script>
 
 </body>
