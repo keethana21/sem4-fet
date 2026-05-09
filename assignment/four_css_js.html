@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Z-Index Demo</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      position: relative;
+      width: 400px;
+      height: 300px;
+      margin: auto;
+      border: 2px dashed #999;
+      background: white;
+    }
+
+    .box {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .red {
+      background: crimson;
+      top: 20px;
+      left: 20px;
+      z-index: 1;
+    }
+
+    .blue {
+      background: royalblue;
+      top: 60px;
+      left: 100px;
+      z-index: 2;
+    }
+
+    .green {
+      background: seagreen;
+      top: 100px;
+      left: 180px;
+      z-index: 3;
+    }
+
+    .controls {
+      margin-top: 25px;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #333;
+      color: white;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Z-Index Demo</h1>
+
+  <div class="container">
+    <div class="box red" id="redBox">Red</div>
+    <div class="box blue" id="blueBox">Blue</div>
+    <div class="box green" id="greenBox">Green</div>
+  </div>
+
+  <div class="controls">
+    <button onclick="bringToFront('redBox')">Bring Red Front</button>
+    <button onclick="bringToFront('blueBox')">Bring Blue Front</button>
+    <button onclick="bringToFront('greenBox')">Bring Green Front</button>
+  </div>
+
+  <script>
+    let highestZ = 3;
+
+    function bringToFront(id) {
+      highestZ++;
+      document.getElementById(id).style.zIndex = highestZ;
+    }
+  </script>
+
+</body>
+</html>
