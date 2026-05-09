@@ -1,108 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Z-Index Demo</title>
+  <title>Z-Index Single Box Demo</title>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      font-family: Arial;
       text-align: center;
-      padding: 30px;
-    }
-
-    h1 {
-      margin-bottom: 20px;
+      margin-top: 50px;
     }
 
     .container {
       position: relative;
-      width: 400px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       margin: auto;
-      border: 2px dashed #999;
-      background: white;
     }
 
     .box {
       position: absolute;
-      width: 180px;
-      height: 180px;
+      width: 200px;
+      height: 200px;
       color: white;
-      font-size: 22px;
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-      transition: all 0.3s ease;
+      font-size: 25px;
+      line-height: 200px;
+      border-radius: 10px;
     }
 
     .red {
-      background: crimson;
-      top: 20px;
-      left: 20px;
+      background: red;
       z-index: 1;
     }
 
     .blue {
-      background: royalblue;
-      top: 60px;
-      left: 100px;
+      background: blue;
       z-index: 2;
     }
 
     .green {
-      background: seagreen;
-      top: 100px;
-      left: 180px;
+      background: green;
       z-index: 3;
     }
 
-    .controls {
-      margin-top: 25px;
-    }
-
     button {
-      padding: 10px 15px;
-      margin: 5px;
-      border: none;
-      border-radius: 6px;
+      margin-top: 20px;
+      padding: 10px;
       cursor: pointer;
-      background: #333;
-      color: white;
-      font-size: 15px;
-    }
-
-    button:hover {
-      background: #555;
     }
   </style>
 </head>
+
 <body>
 
   <h1>Z-Index Demo</h1>
 
+  <!-- All boxes overlap in one place -->
   <div class="container">
     <div class="box red" id="redBox">Red</div>
     <div class="box blue" id="blueBox">Blue</div>
     <div class="box green" id="greenBox">Green</div>
   </div>
 
-  <div class="controls">
-    <button onclick="bringToFront('redBox')">Bring Red Front</button>
-    <button onclick="bringToFront('blueBox')">Bring Blue Front</button>
-    <button onclick="bringToFront('greenBox')">Bring Green Front</button>
-  </div>
+  <br>
+
+  <!-- Buttons -->
+  <button onclick="showBox('redBox')">Show Red</button>
+  <button onclick="showBox('blueBox')">Show Blue</button>
+  <button onclick="showBox('greenBox')">Show Green</button>
 
   <script>
-    let highestZ = 3;
+    let z = 3;
 
-    function bringToFront(id) {
-      highestZ++;
-      document.getElementById(id).style.zIndex = highestZ;
+    function showBox(id) {
+      z++;
+      document.getElementById(id).style.zIndex = z;
     }
   </script>
 
