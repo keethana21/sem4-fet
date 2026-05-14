@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pull-Down Menu and List Box</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        h2 {
+            color: blue;
+        }
+
+        select, button {
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Pull-Down Menu -->
+    <h2>Pull-Down Menu Example</h2>
+
+    <label>Select a Course:</label><br>
+
+    <select id="courseMenu">
+        <option value="">--Select Course--</option>
+        <option value="C Programming">C Programming</option>
+        <option value="Java">Java</option>
+        <option value="Python">Python</option>
+        <option value="JavaScript">JavaScript</option>
+    </select>
+
+    <p id="courseResult"></p>
+
+    <hr>
+
+    <!-- List Box -->
+    <h2>List Box Example</h2>
+
+    <label>Select Your Favorite Fruit:</label><br>
+
+    <select id="fruitList" size="4">
+        <option>Apple</option>
+        <option>Mango</option>
+        <option>Orange</option>
+        <option>Banana</option>
+    </select>
+
+    <br><br>
+
+    <button id="showBtn">Show Selected Fruit</button>
+
+    <p id="fruitResult"></p>
+
+    <!-- JavaScript Code -->
+    <script>
+
+        // Pull-Down Menu Event Listener
+        document.getElementById("courseMenu")
+        .addEventListener("change", function() {
+
+            let selectedCourse = this.value;
+
+            document.getElementById("courseResult")
+            .innerHTML = "You selected: " + selectedCourse;
+        });
+
+
+        // List Box Event Listener
+        document.getElementById("showBtn")
+        .addEventListener("click", function() {
+
+            let selectedFruit =
+            document.getElementById("fruitList").value;
+
+            document.getElementById("fruitResult")
+            .innerHTML = "Selected Fruit: " + selectedFruit;
+        });
+
+    </script>
+
+</body>
+</html
