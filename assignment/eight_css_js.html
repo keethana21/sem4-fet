@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Certificate</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .box { max-width: 700px; margin: auto; }
+        input, select, textarea { width: 100%; padding: 8px; margin: 5px 0; }
+        button { padding: 10px; width: 100%; background: green; color: white; border: none; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        fieldset { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Medical Certificate Form</h2>
+
+    <form id="form">
+
+        <fieldset>
+            <legend>Patient Information</legend>
+            <input type="text" id="name" placeholder="Patient Name">
+            <input type="text" id="id" placeholder="Patient ID">
+            <input type="text" id="doctor" placeholder="Doctor Name">
+        </fieldset>
+
+        <fieldset>
+            <legend>Gender</legend>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+        </fieldset>
+
+        <fieldset>
+            <legend>Symptoms</legend>
+            <input type="checkbox" name="symptoms" value="Fever"> Fever
+            <input type="checkbox" name="symptoms" value="Cold"> Cold
+            <input type="checkbox" name="symptoms" value="Cough"> Cough
+        </fieldset>
+
+        <fieldset>
+            <legend>Department</legend>
+            <select id="dept">
+                <option value="">Select Department</option>
+                <option>General Medicine</option>
+                <option>Cardiology</option>
+                <option>Orthopedics</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tests Recommended</legend>
+            <select id="tests" multiple>
+                <option>Blood Test</option>
+                <option>X-Ray</option>
+                <option>Scan</option>
+            </select>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <table id="table">
+        <tr>
+            <th>Patient Name</th>
+            <th>Patient ID</th>
+            <th>Doctor</th>
+            <th>Gender</th>
+            <th>Symptoms</th>
+            <th>Department</th>
+            <th>Tests</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+// Event Listener
+document.getElementById("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let id = document.getElementById("id").value;
+    let doctor = document.getElementById("doctor").value;
+    let dept = document.getElementById("dept").value;
+
+    // Radio (Gender)
+    let gender = "";
+    let radios = document.getElementsByName("gender");
+    for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            gender = radios[i].value;
+        }
+    }
+
+    // Checkbox (Symptoms)
+    let symptoms = [];
+    let checks = document.getElementsByName("symptoms");
+    for (let i = 0; i < checks.length; i++) {
+        if (checks[i].checked) {
+            symptoms.push(checks[i].value);
+        }
+    }
+
+    // Multiple Select (Tests)
+    let tests = [];
+    let t = document.getElementById("tests").options;
+    for (let i = 0; i < t.length; i++) {
+        if (t[i].selected) {
+            tests.push(t[i].value);
+        }
+    }
+
+    if (!name || !id || !doctor || !gender || symptoms.length === 0 || !dept) {
+        alert("Fill all fields");
+        return;
+    }
+
+    let table = document.getElementById("table");
+    let row = table.insertRow();
+
+    row.insertCell(0).innerText = name;
+    row.insertCell(1).innerText = id;
+    row.insertCell(2).innerText = doctor;
+    row.insertCell(3).innerText = gender;
+    row.insertCell(4).innerText = symptoms.join(", ");
+    row.insertCell(5).innerText = dept;
+    row.insertCell(6).innerText = tests.join(", ");
+
+    document.getElementById("form").reset();
+});
+</script>
+
+</body>
+</html>
