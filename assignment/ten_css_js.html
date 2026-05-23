@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +23,7 @@
             color: white;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             margin: 0;
@@ -31,7 +33,6 @@
         .security-card {
             background: var(--glass);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(56, 189, 248, 0.4);
             border-radius: 20px;
             padding: 3rem;
@@ -46,6 +47,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -63,32 +65,16 @@
             justify-content: center;
             font-size: 2rem;
             box-shadow: 0 0 20px var(--accent-blue);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(56, 189, 248, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
-            }
         }
 
         h1 {
             color: var(--light-blue);
-            margin: 0 0 0.5rem;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
         p {
             color: #cbd5e1;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
+            margin-bottom: 20px;
         }
 
         input {
@@ -103,7 +89,6 @@
             margin-bottom: 1rem;
             box-sizing: border-box;
             outline: none;
-            transition: 0.3s;
         }
 
         input:focus {
@@ -121,7 +106,6 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            text-transform: uppercase;
         }
 
         button:hover {
@@ -132,13 +116,11 @@
         button:disabled {
             background: #475569;
             cursor: not-allowed;
-            transform: none;
         }
 
         #status-msg {
             margin-top: 1rem;
-            font-size: 0.85rem;
-            height: 1rem;
+            font-size: 0.9rem;
         }
 
         .error {
@@ -147,6 +129,17 @@
 
         .success {
             color: var(--success);
+        }
+
+        a {
+            color: var(--light-blue);
+            text-decoration: none;
+        }
+
+        hr {
+            width: 300px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
@@ -167,8 +160,7 @@
             type="password"
             id="passInput"
             placeholder="Enter Security Code"
-            autofocus
-        >
+            autofocus>
 
         <button id="verifyBtn">
             Unlock Terminal
@@ -178,23 +170,34 @@
 
     </div>
 
+    <hr>
+
+    <center>
+        <a href="https://keethana21.github.io/sem4-fet/">
+            Home Page
+        </a>
+    </center>
+
     <script>
 
         const KEY = "Kitty2025";
+
         let tries = 3;
 
         const input = document.getElementById('passInput');
         const btn = document.getElementById('verifyBtn');
         const msg = document.getElementById('status-msg');
-        const attemptsText =
-            document.getElementById('attempts-left');
+        const attemptsText = document.getElementById('attempts-left');
 
         btn.addEventListener('click', () => {
 
-            const val = input.value;
-           do {
+            let val = input.value;
 
-                if (enteredKey === KEY) {
+            let i = 0;
+
+            while (i < 1) {
+
+                if (val === KEY) {
 
                     msg.className = "success";
 
@@ -205,53 +208,54 @@
                     btn.disabled = true;
 
                     setTimeout(() => {
-
-                        window.location.href =
-                            "https://github.io";
-
+                        window.location.href = "https://github.io";
                     }, 1500);
-
-                    break;
 
                 } else {
 
-                    while (tries > 0) {
+                    do {
 
                         tries--;
 
                         msg.className = "error";
 
-                        msg.innerText =
-                            "INVALID KEY";
+                        msg.innerText = "INVALID KEY";
 
                         attemptsText.innerText =
                             `${tries} attempts remaining`;
 
-                        input.value = "";
+                    } while (false);
 
-                        if (tries === 0) {
+                    input.value = "";
 
-                            msg.innerText =
-                                "SYSTEM LOCKED";
+                    if (tries <= 0) {
 
-                            input.disabled = true;
-                            btn.disabled = true;
+                        msg.innerText = "SYSTEM LOCKED";
 
-                            attemptsText.innerText =
-                                "0 attempts remaining";
-                        }
+                        input.disabled = true;
+                        btn.disabled = true;
 
-                        break;
+                        attemptsText.innerText =
+                            "0 attempts remaining";
                     }
                 }
 
-            } while (enteredKey !== KEY && tries > 0);
-        }
-      
+                i++;
+            }
+        });
+
+        input.addEventListener('keypress', (e) => {
+
+            if (e.key === 'Enter') {
+                btn.click();
+            }
+
+        });
+
     </script>
-<hr>
-    <center>
-    <a href="https://keethana21.github.io/sem4-fet/">Home page</a>
-   </center>
+
 </body>
+
 </html>
+      
+   
